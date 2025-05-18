@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, scale } from "motion/react";
+import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 
 const palettes = [
@@ -57,7 +57,7 @@ const palettes = [
 ];
 
 const cardReveal = {
-  hidden: (i: number) => ({
+  hidden: () => ({
     opacity: 0,
     rotate: -10,
     transition: { duration: 2 },

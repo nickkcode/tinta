@@ -6,6 +6,7 @@ import { FluidGradientBlobs } from "../ui/FluidGradient";
 import MagicLoader from "../ui/MagicLoader";
 import Palette from "../ui/Palette";
 
+
 const page = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,12 +25,12 @@ const page = () => {
 
     let rawData = data.result;
 
-    if(typeof rawData === "string") {
+    if (typeof rawData === "string") {
       rawData = rawData.replace(/```json|```/g, "").trim();
       try {
         rawData = JSON.parse(rawData);
-      } catch (error) {
-        rawData = {}
+      } catch {
+        rawData = {};
       }
     }
 
@@ -53,7 +54,7 @@ const page = () => {
                 <Input
                   placeholder="What's on your mind?"
                   value={input}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
                 />
                 <Button
                   size={"lg"}
@@ -84,7 +85,7 @@ const page = () => {
           )}
         </div>
       ) : (
-        <Palette paletteData={paletteData}/>
+        <Palette paletteData={paletteData} />
       )}
     </>
   );

@@ -44,8 +44,11 @@ const Palette: React.FC<PaletteProps> = ({ paletteData }) => {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
   const handleCopy = (color: PaletteColor, idx: number) => {
-    const code = color[format] || color.hex;
-    navigator.clipboard.writeText(code);
+    let code = color[format] || color.hex;
+    if (Array.isArray(code)) {
+      code = code.join(", ");
+    }
+    navigator.clipboard.writeText(code ?? "");
     setCopiedIndex(idx);
     setTimeout(() => setCopiedIndex(null), 1200);
   };

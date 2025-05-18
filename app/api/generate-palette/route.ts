@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     const result = await generatePalette(userPrompt);
 
     return NextResponse.json({ result });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }

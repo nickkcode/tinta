@@ -5,31 +5,21 @@ import { FC } from "react";
 
 const colors = ["#FF6B6B", "#6BCB77", "#4D96FF", "#FFD93D", "#A66DD4"];
 
-const dropletVariants = {
-  initial: (i: number) => ({
-    rotate: 0,
-    pathLength: 0,
-    scale: 0,
-    opacity: 0,
-    x: 0,
-    y: 0,
-  }),
-  animate: (i: number) => ({
-    rotate: 360,
-    pathLength: 1,
-    scale: 1,
-    opacity: 1,
-    x: Math.cos((i * 2 * Math.PI) / colors.length) * 20,
-    y: Math.sin((i * 2 * Math.PI) / colors.length) * 20,
-    transition: {
-      duration: 1.5,
-      delay: i * 0.1,
-      repeat: Infinity,
-      repeatType: "reverse",
-      ease: "easeInOut",
-    },
-  }),
-};
+const getDropletVariant = (i: number) => ({
+  rotate: 360,
+  pathLength: 1,
+  scale: 1,
+  opacity: 1,
+  x: Math.cos((i * 2 * Math.PI) / colors.length) * 20,
+  y: Math.sin((i * 2 * Math.PI) / colors.length) * 20,
+  transition: {
+    duration: 1.5,
+    delay: i * 0.1,
+    repeat: Infinity,
+    repeatType: "reverse" as const,
+    ease: "easeInOut",
+  },
+});
 
 const MagicLoader: FC = () => {
   return (
@@ -38,10 +28,15 @@ const MagicLoader: FC = () => {
         {colors.map((color, i) => (
           <motion.circle
             key={i}
-            custom={i}
-            variants={dropletVariants}
-            initial="initial"
-            animate="animate"
+            initial={{
+              rotate: 0,
+              pathLength: 0,
+              scale: 0,
+              opacity: 0,
+              x: 0,
+              y: 0,
+            }}
+            animate={getDropletVariant(i)}
             cx="60"
             cy="60"
             r="8"

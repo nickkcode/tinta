@@ -8,7 +8,11 @@ const Hero = () => {
     <div className="h-screen flex flex-col md:flex-row text-center md:text-left items-center md:pt-0 pt-32">
       <div className="w-full md:w-1/2">
         <h1 className="md:text-[6rem] text-5xl md:leading-24 font-cabinet font-extrabold">
-          Express ideas through color
+          Express ideas through <span className="text-red-200">c</span>
+          <span className="text-orange-200">o</span>
+          <span className="text-yellow-200">l</span>
+          <span className="text-green-200">o</span>
+          <span className="text-blue-200">r</span>
         </h1>
         <p className="text-2xl font-medium md:mt-4 mt-8 tracking-wider">
           Generate beautiful color palettes from words, moods, or vibes. Export

@@ -10,9 +10,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleMenuOpen = () => {
-    {
-      menuOpen ? setMenuOpen(true) : setMenuOpen(false);
-    }
+    setMenuOpen((prev) => !prev);
     console.log("Toggled");
   };
 

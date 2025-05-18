@@ -7,7 +7,7 @@ import MagicLoader from "../ui/MagicLoader";
 import Palette from "../ui/Palette";
 
 
-const page = () => {
+const Page = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [paletteData, setpaletteData] = useState(null);
@@ -91,4 +91,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

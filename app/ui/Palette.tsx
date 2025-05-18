@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 
 type PaletteColor = {
@@ -15,7 +16,7 @@ type PaletteData = {
   title?: string;
   description?: string;
   colors?: PaletteColor[];
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 interface PaletteProps {
@@ -56,7 +57,7 @@ const Palette: React.FC<PaletteProps> = ({ paletteData }) => {
   return (
     <div className="flex h-screen">
       <div className="w-1/2 mt-8 flex flex-col gap-4">
-        <h2 className="font-cabinet text-6xl font-bold">
+        <h2 className="font-cabinet text-8xl font-extrabold">
           {data.title || "No title found"}
         </h2>
         <p className="text-2xl tracking-wider">{data.description}</p>
@@ -74,13 +75,33 @@ const Palette: React.FC<PaletteProps> = ({ paletteData }) => {
             ))}
           </select>
         </label>
+        <Button
+          variant={"outline"}
+          size={"lg"}
+          className="mt-4 w-1/2"
+          onClick={() => {
+            const paletteJson = JSON.stringify(
+              data.colors?.map((color) => ({
+                name: color.name,
+                value: color[format] || color.hex,
+              })),
+              null,
+              2
+            );
+            navigator.clipboard.writeText(paletteJson);
+            setCopiedIndex(-1);
+            setTimeout(() => setCopiedIndex(null), 1200);
+          }}
+        >
+          {copiedIndex === -1 ? "Copied!" : "Copy Palette as JSON"}
+        </Button>
       </div>
       <div className="w-full h-screen overflow-y-auto p-8 custom-scrollbar">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
           {data.colors?.map((color: PaletteColor, idx: number) => (
             <div
               key={color.hex}
-              className="w-58 h-72 rounded-xl shadow-2xl bg-black dark:bg-white p-2 pb-16 relative flex-shrink-0 cursor-pointer transition-transform hover:scale-105"
+              className="w-58 h-72 rounded-xl shadow-2xl bg-black dark:bg-white p-2 pb-16 relative flex-shrink-0 cursor-pointer transition-transform hover:scale-105 duration-500 easeInOut"
               onClick={() => handleCopy(color, idx)}
               title={`Click to copy ${color[format] || color.hex}`}
             >
@@ -98,13 +119,14 @@ const Palette: React.FC<PaletteProps> = ({ paletteData }) => {
                 </div>
               </div>
               <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-center">
-                <h1 className="font-bold" style={{ color: color.hex }}>
-                  {color[format] || color.hex}
-                </h1>
-                {copiedIndex === idx && (
-                  <span className="block text-green-400 font-semibold mt-2">
+                {copiedIndex === idx ? (
+                  <span className="block text-primary-foreground font-semibold mt-2">
                     Copied!
                   </span>
+                ) : (
+                  <h1 className="font-bold" style={{ color: color.hex }}>
+                    {color[format] || color.hex}
+                  </h1>
                 )}
               </div>
             </div>

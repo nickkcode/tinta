@@ -8,7 +8,7 @@ const About = () => {
       </h2>
       <p className="text-lg md:text-2xl text-primary/80 leading-relaxed w-2/3 mx-auto">
         Our tool transforms words, moods, and feelings into stunning, shareable
-        color palettes. Whether you're designing a brand, building a UI, or just
+        color palettes. Whether you&apos;re designing a brand, building a UI, or just
         chasing an aesthetic, we help you find the perfect shades that match
         your creative energy. No guesswork — just intuitive, intelligent palette
         generation that speaks your vibe.

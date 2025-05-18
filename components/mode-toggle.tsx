@@ -10,7 +10,10 @@ const themeOrder = ["light", "dark"] as const;
 export function ModeToggle() {
   const { theme, setTheme } = useTheme();
   const [index, setIndex] = React.useState(() =>
-    Math.max(themeOrder.findIndex((t) => t === theme), 0)
+    Math.max(
+      themeOrder.findIndex((t) => t === theme),
+      0
+    )
   );
 
   const handleClick = () => {
@@ -29,7 +32,12 @@ export function ModeToggle() {
   };
 
   return (
-    <Button variant="outline" size="icon" onClick={handleClick} className="mx-5">
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={handleClick}
+      className="mx-5"
+    >
       {renderIcon()}
       <span className="sr-only">Toggle theme</span>
     </Button>

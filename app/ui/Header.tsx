@@ -38,12 +38,6 @@ const Header = () => {
             </Link>
             <Link
               className="hover:-translate-y-1 transition-transform hover:scale-110 py-6 px-3 duration-300"
-              href={"/#explore"}
-            >
-              Explore
-            </Link>
-            <Link
-              className="hover:-translate-y-1 transition-transform hover:scale-110 py-6 px-3 duration-300"
               href={"/#about"}
             >
               About

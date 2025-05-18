@@ -95,35 +95,47 @@ export default function HeroGraphics() {
   return (
     <div className="relative w-full h-[500px] flex flex-col items-center justify-center overflow-hidden">
       <div className="relative w-full flex items-center justify-center">
-        {currentPalette.colors.map((color, i) => (
+        {showTitle ? (
           <motion.div
-            key={color.hex + i + index}
-            custom={i}
-            initial="hidden"
-            animate={!showTitle ? "visible" : "hidden"}
-            variants={cardReveal}
-            className="absolute w-64 h-80 rounded-xl shadow-2xl origin-bottom -rotate-12 bg-black dark:bg-white p-2 pb-16"
-            style={{
-              transform: `rotate(${i * 6}deg) translateX(${i * 35 - 70}px)`,
-              zIndex: currentPalette.colors.length - i,
-            }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -40 }}
+            transition={{ duration: 0.6 }}
+            className="absolute z-50 text-xl tracking-wider text-black dark:text-white bg-white/80 dark:bg-black/80 px-16 py-2 shadow-2xl border rounded-full"
           >
-            <div
-              className="relative w-full h-full rounded-md overflow-hidden"
-              style={{ backgroundColor: color.hex }}
+            {currentPalette.title}|
+          </motion.div>
+        ) : (
+          currentPalette.colors.map((color, i) => (
+            <motion.div
+              key={color.hex + i + index}
+              custom={i}
+              initial="hidden"
+              animate="visible"
+              variants={cardReveal}
+              className="absolute w-64 h-80 rounded-xl shadow-2xl origin-bottom -rotate-12 bg-black dark:bg-white p-2 pb-16"
+              style={{
+                transform: `rotate(${i * 6}deg) translateX(${i * 35 - 70}px)`,
+                zIndex: currentPalette.colors.length - i,
+              }}
             >
               <div
-                className="absolute text-6xl top-1/2 -translate-y-1/2 -rotate-90 left-1/2 -translate-x-1/2 font-cabinet font-extrabold brightness-50"
-                style={{ color: color.hex }}
+                className="relative w-full h-full rounded-md overflow-hidden"
+                style={{ backgroundColor: color.hex }}
               >
-                {color.name}
-              </div>
+                <div
+                  className="absolute text-6xl top-1/2 -translate-y-1/2 -rotate-90 left-1/2 -translate-x-1/2 font-cabinet font-extrabold brightness-50"
+                  style={{ color: color.hex }}
+                >
+                  {color.name}
+                </div>
                 <div className="absolute -bottom-10 z-50 left-1/2 -translate-x-1/2 text-sm font-semibold text-white bg-black/40 dark:bg-white/40 dark:text-black backdrop-blur px-3 py-1 rounded-md">
-                {color.hex}
+                  {color.hex}
+                </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))
+        )}
       </div>
     </div>
   );

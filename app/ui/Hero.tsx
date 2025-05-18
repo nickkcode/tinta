@@ -27,7 +27,7 @@ const Hero = () => {
       <div className="md:w-1/2">
         <HeroGraphics />
       </div>
-      <div className="rounded-full h-[500px] w-[500px] bg-blue-200 absolute blur-[200px] right-0 top-0 opacity-50"></div>
+      <div className="rounded-full h-[500px] w-[500px] bg-blue-200 absolute blur-[200px] right-0 top-0 opacity-40 -z-10"></div>
     </div>
   );
 };
